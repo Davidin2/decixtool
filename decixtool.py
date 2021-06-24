@@ -75,8 +75,12 @@ Subject: %s
 
 
 url_status="https://lg.de-cix.net/api/v1/routeservers/rs1_mad_ipv4/status"
-url="https://lg.de-cix.net/api/v1/routeservers/rs1_mad_ipv4/neighbors/R192_33/routes"
-url2="https://lg.de-cix.net/api/v1/routeservers/rs2_mad_ipv4/neighbors/R192_33/routes"
+url="https://lg.de-cix.net/api/v1/routeservers/rs1_mad_ipv4/neighbors/R192_33/routes" #ALC
+url2="https://lg.de-cix.net/api/v1/routeservers/rs2_mad_ipv4/neighbors/R192_33/routes" #ALC
+url3="https://lg.de-cix.net/api/v1/routeservers/rs1_mad_ipv4/neighbors/R192_145/routes" #ATO
+url4="https://lg.de-cix.net/api/v1/routeservers/rs2_mad_ipv4/neighbors/R192_145/routes" #ATO
+
+
 # Obtenemos solo las aceptadas
 
 carga_config()
