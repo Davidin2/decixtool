@@ -5,6 +5,7 @@ from datetime import date
 import smtplib
 import configparser
 import re
+import json
 
 AS=""                     #AS que debe estar en el aspath
 ID=""                     #Para diferenciar si tienes varias instancias corriendo
@@ -91,6 +92,8 @@ log="-------------Start time: " + str(hora) + "-------------<BR>\n DECIXTOOL " +
 texto2="""<TABLE BORDER="1"> <TR><TH>RANGE</TH><TH>STATUS</TH><TH>AS PATH</TH></TR>"""
 log=log+texto2
 texto2=""
+data = {}
+data["DECIXTOOL " + ID] = []
 
 try:
     response=requests.get(url)
@@ -122,13 +125,25 @@ aspath="no data"
 for rango in rangos:
     if rango in redes_aceptadas:
         texto2="<TR><TD>" + rango + " </TD><TD>Routed</TD><TD>" + str(aspath) + "</TD></TR>"
+        data["DECIXTOOL " + ID].append({
+                'range': rango,
+                'Status': 'Routed'})
+
     else:
         #print ("ALERT: " + rango + " NOT Routed")
         texto="ALERT: " + rango + " NOT Routed"
         texto2="""<TR bgcolor="red"><TD>"""  + rango + "</TD><TD>NOT Routed</TD></TR>"
+        data["DECIXTOOL " + ID].append({
+                'range': rango,
+                'Status': 'NOT Routed'})
         fallo+=1
     log=log+texto2
 log=log+"</TABLE>"
+
+with open('ultimo.json', 'w') as file:
+    json.dump(data, file, indent=4)
+
+
 
 num_prefijos_antes=-1
 lista_prefijos_antes=[]
