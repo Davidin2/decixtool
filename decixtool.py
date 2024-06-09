@@ -108,17 +108,38 @@ dic=response.json()
 # for key in dic:
 #     print(key)
 # api
+# pagination
 # imported
 # filtered
 # not_exported
 
+paginas=dic["pagination"]["total_pages"]
 
+pagina=0
 fallo=0
 aceptadas=dic["imported"]
 filtradas=dic["filtered"]
 redes_aceptadas=[]
 for red in aceptadas:
     redes_aceptadas.append(red["id"])
+
+while (paginas>1):
+    pagina=pagina+1
+    paginas=paginas-1
+    url_page=url+"?page="+str(pagina)
+    try:
+        response=requests.get(url_page)
+    except Exception as err:
+        print(f'Other error occurred: {err}')  # Python 3.6
+        exit(0)
+    else:
+        print('Success!')
+
+    dic=response.json()
+    aceptadas=dic["imported"]
+    for red in aceptadas:
+        redes_aceptadas.append(red["network"])
+
 
 aspath="no data"
 
@@ -191,8 +212,7 @@ texto="<br><br>These prefixes were before and now they are not: " + str(no_esta_
 log=log+texto
 texto="<br><br>These prefixes are now and they were not before: " + str(no_estaba_antes)
 log=log+texto
-texto="<br><br>" + str(len(filtradas))+ " Prefixes filtered in DECIX" 
-log=log+texto
+
 
 hora_fin = datetime.now().replace(microsecond=0)
 texto2="<br><br><br>-------------End time: " + str(hora_fin) + "-------------<BR>\n"
