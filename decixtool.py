@@ -76,10 +76,10 @@ Subject: %s
 
 
 url_status="https://lg.de-cix.net/api/v1/routeservers/rs1_mad_ipv4/status"
-url="https://lg.de-cix.net/api/v1/routeservers/rs1_mad_ipv4/neighbors/R192_33/routes" #ALC
-url2="https://lg.de-cix.net/api/v1/routeservers/rs2_mad_ipv4/neighbors/R192_33/routes" #ALC
-url3="https://lg.de-cix.net/api/v1/routeservers/rs1_mad_ipv4/neighbors/R192_145/routes" #ATO
-url4="https://lg.de-cix.net/api/v1/routeservers/rs2_mad_ipv4/neighbors/R192_145/routes" #ATO
+url="https://lg.de-cix.net/api/v1/routeservers/rs1_mad_ipv4/neighbors/R192_33/routes/received" #ALC
+url2="https://lg.de-cix.net/api/v1/routeservers/rs2_mad_ipv4/neighbors/R192_33/routes/received" #ALC
+url3="https://lg.de-cix.net/api/v1/routeservers/rs1_mad_ipv4/neighbors/R192_145/routes/received" #ATO
+url4="https://lg.de-cix.net/api/v1/routeservers/rs2_mad_ipv4/neighbors/R192_145/routes/received" #ATO
 
 
 # Obtenemos solo las aceptadas
@@ -121,7 +121,7 @@ aceptadas=dic["imported"]
 filtradas=dic["filtered"]
 redes_aceptadas=[]
 for red in aceptadas:
-    redes_aceptadas.append(red["id"])
+    redes_aceptadas.append(red["network"])
 
 while (paginas>1):
     pagina=pagina+1
